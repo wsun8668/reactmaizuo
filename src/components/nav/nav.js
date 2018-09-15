@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; 
 import './nav.css';
+import {NavLink} from 'react-router-dom';
 
 class NavUI extends Component {
 	render() {
@@ -10,13 +11,13 @@ class NavUI extends Component {
 				<ReactCSSTransitionGroup transitionName="slide" transitionEnterTimeout={0} transitionLeaveTimeout={0}>
 					{this.props.isNavShow && 
 						<div id="mz_menu">
-							<ul>
-								<li>首页<i className="iconfont icon-moreunfold"></i></li>
-								<li>影片<i className="iconfont icon-moreunfold"></i></li>
-								<li>影院<i className="iconfont icon-moreunfold"></i></li>
-								<li>商城<i className="iconfont icon-moreunfold"></i></li>
-								<li>我的<i className="iconfont icon-moreunfold"></i></li>
-								<li>卖座卡<i className="iconfont icon-moreunfold"></i></li>
+							<ul onClick={this.props.handleNavShow}>
+								<li><NavLink to="/home">首页<i className="iconfont icon-moreunfold"></i></NavLink></li>
+								<li><NavLink to="/film">影片<i className="iconfont icon-moreunfold"></i></NavLink></li>
+								<li><NavLink to="/home">影院<i className="iconfont icon-moreunfold"></i></NavLink></li>
+								<li><NavLink to="/home">商城<i className="iconfont icon-moreunfold"></i></NavLink></li>
+								<li><NavLink to="/home">我的<i className="iconfont icon-moreunfold"></i></NavLink></li>
+								<li><NavLink to="/home">卖座卡<i className="iconfont icon-moreunfold"></i></NavLink></li>
 							</ul>
 						</div>
 					}
@@ -33,7 +34,11 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-	return {};
+	return {
+		handleNavShow() {
+			dispatch({type: 'CHANGE_NAVSHOW', payload: false})
+		}
+	};
 }
 
 var Nav = connect(mapStateToProps, mapDispatchToProps)(NavUI);
